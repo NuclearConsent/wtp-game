@@ -142,12 +142,12 @@ svg {
     content: "Who's that Pokémon?";
     font-size: 32px;
     font-family: pokemon;
+    color: #ffcb05;
     text-shadow:
     -1px 0 1px #2a75bb,
     0 1px 1px #2a75bb,
     1px 0 1px #2a75bb,
-    0 -1px 1px #2a75bb,
-    color: #ffcb05;
+    0 -1px 1px #2a75bb;
   }
 }
 _::-webkit-full-page-media, _:future, :root
