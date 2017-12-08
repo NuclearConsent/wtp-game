@@ -78,7 +78,7 @@ function revealPokemon() {
   console.log("Question Number: " + question);
   $(".img").attr("id", "");
   $(".grid-container").empty();
-  if (question == 2) {
+  if (question == 9) {
       console.log("Game Over");
       setTimeout(resultsPage, 3500);
       $(".box-game:eq(1)").append('<div class="box-game" id="reveal">' + pokemonName[tmpName] + '</div>');
