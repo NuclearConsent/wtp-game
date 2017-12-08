@@ -14,6 +14,7 @@ function randomNumber(min, max) {
   return Math.random() * (max - min) + min;
 }
 
+// Generate data and check for dupes
 function newGenerate(num, data) {
   for (var i = 0; i < num; i++) {
     var tmp = Math.trunc(randomNumber(1, 152));
@@ -25,15 +26,15 @@ function newGenerate(num, data) {
      }
   }
 }
+
+// Countdown Timer - Used to decrease 'count'
 function countDown() {
   var timeOut = setTimeout(countDown, 1000);
   if (count > 0) {
     $("#hide-element").text(count);
     count--;
-    console.log(count);
   }
   else if (count == 0) {
-    console.log("Times up");
     clearTimeout(timeOut);
     tmpStatus = 2;
     revealPokemon();
@@ -44,6 +45,7 @@ function countDown() {
   }
 }
 
+// Generate and display a starting screen
 function startPage() {
   $(".box-game:eq(1)").append('<img src="" class="img"></div>');
   $(".img").attr("src", "assets/img/1.png");
@@ -58,6 +60,7 @@ function startPage() {
   });
 }
 
+// Generate and display pokemon to guess
 function gamePage() {
   $(".status").remove();
   $(".grid-container").empty();
@@ -71,13 +74,12 @@ function gamePage() {
   nextPokemon();
 }
 
+// Reveal the pokemon
 function revealPokemon() {
   var tmpName = pokemon[question];
-  console.log("Question Number: " + question);
   $(".img").attr("id", "");
   $(".grid-container").empty();
   if (question == 9) {
-      console.log("Game Over");
       setTimeout(resultsPage, 3500);
       $(".box-game:eq(1)").append('<div class="box-game" id="reveal">' + pokemonName[tmpName] + '</div>');
       $(".status").html(questionStatus[tmpStatus]);
@@ -90,6 +92,7 @@ function revealPokemon() {
   }
 }
 
+// Generate the display the results
 function resultsPage() {
   $(".grid-container").empty();
   $("#reveal").empty();
@@ -112,26 +115,23 @@ function resultsPage() {
   });
 }
 
+// Catchall function for cleanup and run revealPokemon
 function pickPokemon() {
   answers = [];
   count = -1;
   revealPokemon();
   clearTimeout(timeOut);
 }
+
+// Generate 5 answers and push the correct one randomly into the array
+// Also used to display elements on the Game screen
 function nextPokemon() {
   count = 10;
   answers = [];
   newGenerate(5, answers);
-  console.log("List Answers: " + answers);
-  console.log("List Pokemon: " + pokemon);
   var tmpName = pokemon[question];
-  console.log("Correct Pokemon: " + pokemonName[tmpName]);
   var randomAnswer = Math.trunc(randomNumber(0, 6));
-  console.log(randomAnswer + " Random Number");
   answers.splice(randomAnswer, 0, pokemon[question]);
-  console.log("List Answers 2: " + answers);
-  //answers.push(pokemon[question]);
-  //answers.sort(function(a, b){return a - b;});
   $(".img").attr("id", "img-hide");
   $(".img").attr("src", "assets/img/" + pokemon[question] + ".png");
   for (i = 0; i < 6; i++) {
@@ -140,13 +140,11 @@ function nextPokemon() {
   }
   $(".grid-item").one("click", function () {
    if (this.id == pokemon[question]) {
-      console.log("Correct Pokemon!");
       correctAnswers++;
       tmpStatus = 0;
       pickPokemon();
    }
    else {
-      console.log("Incorrect Pokemon!");
       incorrectAnswers++;
       tmpStatus = 1;
       pickPokemon();
@@ -155,10 +153,13 @@ function nextPokemon() {
   countDown();
 }
 
+// Set values to the default & generate 10 random pokemon
 function startGame() {
   missed = 0;
   question = 0;
   pokemon = [];
   newGenerate(10, pokemon);
 }
+
+// Start the game :P
 startPage();
