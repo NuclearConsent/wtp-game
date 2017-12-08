@@ -11,14 +11,12 @@ var tmpStatus;
 
 // Random number generator
 function randomNumber(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+  return Math.random() * (max - min) + min;
 }
 
 function newGenerate(num, data) {
   for (var i = 0; i < num; i++) {
-    var tmp = randomNumber(1, 151);
+    var tmp = Math.trunc(randomNumber(1, 152));
      if (data.includes(tmp)) {
        i--;
      }
@@ -128,7 +126,7 @@ function nextPokemon() {
   console.log("List Pokemon: " + pokemon);
   var tmpName = pokemon[question];
   console.log("Correct Pokemon: " + pokemonName[tmpName]);
-  var randomAnswer = randomNumber(0, 5);
+  var randomAnswer = Math.trunc(randomNumber(0, 6));
   console.log(randomAnswer + " Random Number");
   answers.splice(randomAnswer, 0, pokemon[question]);
   console.log("List Answers 2: " + answers);
